@@ -1,10 +1,27 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="sudoku.css">
 </head>
+
 <body>
-    Sudoku Game
+    <div id = "header">
+        <div id="headSudoku">Sudoku</div>
+        <div id="timer">00:00</div>        
+    </div>
+    <hr>
+    <div id="sudoku-container"></div>
+    <div id="numbers-container"></div>
+    <div id="buttons">
+        <button id="start-button">Start</button>
+        <button id="check-button">Check</button>
+        <button id="erase-button">Erase</button>
+    </div>
+    <div id ="stop-button">Stop Timer</div>
+    <script src="sudoku.js"></script>
 </body>
+
 </html>

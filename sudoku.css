@@ -1,0 +1,199 @@
+body {
+    display: flex;
+    background-color: antiquewhite;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Sudoku Table */
+
+.sudoku-cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+    display: flex;
+    color: gray;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sudoku-row {
+    display: flex;
+}
+
+.sudoku-row:nth-child(3) {
+    border-bottom: 3px solid gray;
+}
+
+.sudoku-row:nth-child(6) {
+    border-bottom: 3px solid gray;
+}
+
+.sudoku-cell:nth-child(3) {
+    border-right: 3px solid gray;
+}
+
+.sudoku-cell:nth-child(6) {
+    border-right: 3px solid gray;
+}
+
+.sudoku-cell:hover {
+    background-color: rgb(252, 217, 170);
+    transition: background-color 0.5s ease;
+}
+
+/* Numbers */
+
+#numbers-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.numbers-cell{
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    text-align: center;
+    color: gray;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+    
+}
+
+.numbers-row{
+    display: flex;
+}
+
+.numbers-cell:nth-child(n) {
+    border-top: 3px solid gray;
+}
+
+.numbers-cell:nth-child(n) {
+    border-bottom: 3px solid gray;
+}
+
+.numbers-cell:nth-child(1) {
+    border-left: 3px solid gray;
+}
+
+.numbers-cell:nth-child(9) {
+    border-right: 3px solid gray;
+}
+
+.numbers-cell.clicked {
+    font-weight: bold;
+    background-color: rgb(252, 217, 170);
+}
+
+.numbers-cell:hover{
+    background-color: rgb(252, 217, 170);
+    transition: background-color 0.5s ease;
+}
+
+/* Start Button */
+
+#start-button {
+    padding: 10px 24px;
+    font-size: 24px;
+    background-color: antiquewhite;
+    border: 3px solid gray;
+    color: gray;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+    background-color: rgb(252, 217, 170);
+}
+
+/* Check Sudoku */
+
+#check-button{
+    padding: 10px 24px;
+    font-size: 24px;
+    background-color: antiquewhite;
+    border: 3px solid gray;
+    color: gray;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#check-button:hover {
+    background-color: rgb(252, 217, 170);
+}
+
+/* Erase Button */
+
+#erase-button{
+    padding: 10px 24px;
+    font-size: 24px;
+    background-color: antiquewhite;
+    border: 3px solid gray;
+    color: gray;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#erase-button:hover {
+    background-color: rgb(252, 217, 170);
+}
+
+#erase-button.clicked{
+    background-color: rgb(252, 217, 170);
+}
+
+/* Button Row */
+#buttons {
+    display: flex;
+    gap: 50px;
+}
+
+/* Header's Row */
+#header {
+    display: flex;
+}
+
+#timer{
+    padding: 10px 24px;
+    margin-top: 6px;
+    margin-left: 24px;
+    font-size: 24px;
+    background-color: antiquewhite;
+    border: 3px solid gray;
+    color: gray;
+    border-radius: 3px;
+}
+
+#headSudoku{
+    padding: 10px 24px;
+    font-size: 32px;
+    color: gray;
+}
+
+#stop-button{
+    padding: 10px 24px;
+    font-size: 24px;
+    margin-top: 24px;
+    background-color: antiquewhite;
+    border: 3px solid gray;
+    border-radius: 3px;
+    color: gray;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#stop-button:hover {
+    background-color: rgb(252, 217, 170);
+}
