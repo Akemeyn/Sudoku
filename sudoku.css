@@ -103,6 +103,7 @@ body {
 
 #start-button {
     padding: 10px 24px;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 24px;
     background-color: antiquewhite;
     border: 3px solid gray;
@@ -120,6 +121,7 @@ body {
 
 #check-button{
     padding: 10px 24px;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 24px;
     background-color: antiquewhite;
     border: 3px solid gray;
@@ -138,6 +140,7 @@ body {
 #erase-button{
     padding: 10px 24px;
     font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
     background-color: antiquewhite;
     border: 3px solid gray;
     color: gray;
@@ -157,18 +160,19 @@ body {
 /* Button Row */
 #buttons {
     display: flex;
+    font-family: 'Times New Roman', Times, serif;
     gap: 50px;
 }
 
 /* Header's Row */
 #header {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 #timer{
     padding: 10px 24px;
-    margin-top: 6px;
-    margin-left: 24px;
     font-size: 24px;
     background-color: antiquewhite;
     border: 3px solid gray;
@@ -184,6 +188,7 @@ body {
 
 #stop-button{
     padding: 10px 24px;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 24px;
     margin-top: 24px;
     background-color: antiquewhite;
@@ -195,5 +200,9 @@ body {
 }
 
 #stop-button:hover {
+    background-color: rgb(252, 217, 170);
+}
+
+#stop-button.clicked{
     background-color: rgb(252, 217, 170);
 }

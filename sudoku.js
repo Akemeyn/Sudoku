@@ -5,6 +5,20 @@ let seconds = 0;
 let isStartGoOn = false;
 let lastClickedCell = null;
 let timer;
+let sudokuBoard = [];
+let solvedSudokuBoard = [];
+
+const clearBoard = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
 
 const sudokuContainer = document.getElementById("sudoku-container");
 const startButton = document.getElementById("start-button");
@@ -14,12 +28,6 @@ const stopButton = document.getElementById("stop-button");
 const timerElement = document.getElementById("timer");
 
 //When you restart the page, you will see empty sudoku board on the page.
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    createSudoku(clearBoard);
-    isGameOn = false;
-});
 
 function startTimer() {
     isStartGoOn = true;
@@ -37,36 +45,46 @@ function stopTimer() {
     isStartGoOn = false;
 }
 
+function resetTimer() {
+    clearInterval(timer);
+    isStartGoOn = false;
+    seconds = 0;
+    timerElement.textContent = "00:00";
+}
+
 stopButton.addEventListener("click", function () {
-    if(isStartGoOn){
+    if (isStartGoOn) {
         stopTimer();
-    }else{
-        isStartGoOn = true;
+        isGameOn = false;
+        stopButton.classList.add("clicked");
+    } else {
         startTimer();
+        isGameOn = true;
+        stopButton.classList.remove("clicked");
     }
-    
+
 });
 
 function createSudoku(table) {
-    const sudokuSize = 9;
     sudokuContainer.innerHTML = '';
 
-    for (let i = 0; i < sudokuSize; i++) {
+    for (let i = 0; i < 9; i++) {
         const row = document.createElement("div");
         row.classList.add("sudoku-row");
 
-        for (let j = 0; j < sudokuSize; j++) {
+        for (let j = 0; j < 9; j++) {
             const cell = document.createElement("div");
             cell.classList.add("sudoku-cell");
 
             cell.dataset.row = i;
-            cell.dataset.col = j
+            cell.dataset.col = j;
 
             if (table[i][j] !== 0) {
                 cell.textContent = table[i][j];
             } else {
                 cell.textContent = "";
             }
+
 
             row.appendChild(cell);
         }
@@ -83,55 +101,24 @@ sudokuContainer.addEventListener("click", function (event) {
     const i = parseInt(clickedCell.dataset.row);
     const j = parseInt(clickedCell.dataset.col);
 
-    if (isClickedErase === true && sudokuData[i][j] === 0) {
+    if (isClickedErase === true && sudokuBoard[i][j] === 0 && isGameOn === true) {
         clickedCell.textContent = '';
-    } else if (selectedNumber !== null && sudokuData[i][j] === 0) {
+    } else if (selectedNumber !== null && sudokuBoard[i][j] === 0 && isGameOn == true) {
         clickedCell.textContent = selectedNumber;
     }
 });
 
 
-const clearBoard = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-
-const sudokuData = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-];
-
-const solvedSudoku = [
-    [5, 3, 4, 6, 7, 8, 9, 1, 2],
-    [6, 7, 2, 1, 9, 5, 3, 4, 8],
-    [1, 9, 8, 3, 4, 2, 5, 6, 7],
-    [8, 5, 9, 7, 6, 1, 4, 2, 3],
-    [4, 2, 6, 8, 5, 3, 7, 9, 1],
-    [7, 1, 3, 9, 2, 4, 8, 5, 6],
-    [9, 6, 1, 5, 3, 7, 2, 8, 4],
-    [2, 8, 7, 4, 1, 9, 6, 3, 5],
-    [3, 4, 5, 2, 8, 6, 1, 7, 9]
-];
 
 startButton.addEventListener("click", function () {
     const confirmed = confirm("                 Are you sure?\nDo you want to create a new game?");
     if (confirmed) {
-        sudokuTemp = [...sudokuData];
-        createSudoku(sudokuTemp);
+        resetTimer();
+        stopButton.classList.remove("clicked");
+        solvedSudokuBoard = generateSudoku();
+        let copiedMatrix = [...solvedSudokuBoard.map(row => [...row])];
+        sudokuBoard = removeCells(copiedMatrix, 1);
+        createSudoku(sudokuBoard);
         isGameOn = true;
         startTimer();
     }
@@ -154,15 +141,20 @@ eraseButton.addEventListener("click", function () {
 //Sudoku Compare Part
 
 function compareSudokus(sudokuValues, sudokuData) {
-
     const sudokuValues2D = [];
+
     for (let i = 0; i < 9; i++) {
         sudokuValues2D.push(sudokuValues.slice(i * 9, (i + 1) * 9));
     }
 
+    console.log("sudokuValues2D:", sudokuValues2D);
+    console.log("sudokuData:", sudokuData);
+
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
-            if (parseInt(sudokuValues2D[i][j], 10) !== sudokuData[i][j]) {
+            const parsedValue = parseInt(sudokuValues2D[i][j], 10);
+
+            if (parsedValue !== sudokuData[i][j]) {
                 return false;
             }
         }
@@ -171,30 +163,44 @@ function compareSudokus(sudokuValues, sudokuData) {
     return true;
 }
 
+
 checkButton.addEventListener("click", function () {
-    const confirmed = confirm("Do you want to check the sudoku board?");
-    if (confirmed) {
-        const sudokuCells = document.querySelectorAll(".sudoku-cell");
-        const sudokuValues = [];
+    if (isGameOn === false) {
+        alert("The game not started...");
+    } else {
+        const confirmed = confirm("Do you want to check the sudoku board?");
+        if (confirmed) {
+            const sudokuCells = document.querySelectorAll(".sudoku-cell");
+            const sudokuValues = [];
 
-        sudokuCells.forEach(function (cell) {
-            const value = cell.textContent;
-            sudokuValues.push(value);
-        });
+            sudokuCells.forEach(function (cell) {
+                const value = cell.textContent;
+                sudokuValues.push(value);
+            });
 
-        const isSudokuEqual = compareSudokus(sudokuValues, solvedSudoku);
+            const isSudokuEqual = compareSudokus(sudokuValues, solvedSudokuBoard);
 
-        if (isSudokuEqual) {
-            alert("Correct Answer!");
-        } else {
-            alert("False Answer!");
+            if (isSudokuEqual) {
+                alert("Correct Answer!");
+                isGameOn = false;
+                stopTimer();
+            } else {
+                alert("False Answer!");
+            }
         }
     }
 
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    createSudoku(clearBoard);
+    isGameOn = false;
 });
 
 
 document.addEventListener("DOMContentLoaded", function () {
+
     const numbersContainer = document.getElementById("numbers-container");
 
 
@@ -229,3 +235,98 @@ document.addEventListener("DOMContentLoaded", function () {
     createNumbers();
 });
 
+// SUDOKU GENERATOR PART
+//Solving sudoku algorithms are here
+
+function solveSudoku(board) {
+    const emptyCell = findEmptyCell(board);
+
+    if (!emptyCell) {
+        return true;
+    }
+
+    const [row, col] = emptyCell;
+
+    for (let num = 1; num <= 9; num++) {
+        const randomNumber = Math.floor(Math.random() * 9) + 1;
+        if (isValidMove(board, row, col, randomNumber)) {
+            board[row][col] = randomNumber;
+
+            if (solveSudoku(board)) {
+                return true;
+            }
+
+            board[row][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+function findEmptyCell(board) {
+
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            if (board[row][col] === 0) {
+                return [row, col];
+            }
+        }
+    }
+
+    return null;
+}
+
+function isValidMove(board, row, col, num) {
+
+    for (let i = 0; i < 9; i++) {
+        if (board[row][i] === num || board[i][col] === num) {
+            return false;
+        }
+    }
+
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (board[startRow + i][startCol + j] === num) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------
+
+
+//Genarate sudoku algorithms are here
+
+function generateSudoku() {
+    const sudoku = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+
+    solveSudoku(sudoku);
+
+    return sudoku;
+}
+
+function removeCells(board, count) {
+
+    for (let i = 0; i < count; i++) {
+        const row = Math.floor(Math.random() * 9);
+        const col = Math.floor(Math.random() * 9);
+        board[row][col] = 0;
+    }
+
+    return board;
+}
