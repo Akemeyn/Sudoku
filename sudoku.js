@@ -117,7 +117,7 @@ startButton.addEventListener("click", function () {
         stopButton.classList.remove("clicked");
         solvedSudokuBoard = generateSudoku();
         let copiedMatrix = [...solvedSudokuBoard.map(row => [...row])];
-        sudokuBoard = removeCells(copiedMatrix, 1);
+        sudokuBoard = removeCells(copiedMatrix, 80);
         createSudoku(sudokuBoard);
         isGameOn = true;
         startTimer();
